@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusStationery - College Stationery Management System</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Utility Header Bar with Dynamic Date & Time -->
+  <header class="top-bar">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <span class="live-clock-badge" id="liveClock">
+          <i class="bi bi-clock"></i> Loading campus time...
+        </span>
+        <span id="storeStatusBadge" class="badge bg-success-subtle text-success border border-success-subtle py-1 px-2">
+          <span class="pulse-indicator me-1"></span> Store Open
+        </span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span><i class="bi bi-geo-alt-fill text-warning me-1"></i> Central Block Ground Floor, Counter 1 & 2</span>
+        <a href="tel:04029556100" class="d-none d-md-inline"><i class="bi bi-telephone-fill me-1"></i> 040-29556100</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-campus sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="CampusStationery Logo" class="brand-icon">
+      </a>
+      
+      <!-- Mobile hamburger toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html"><i class="bi bi-house-door me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html"><i class="bi bi-grid me-1"></i> All Stationery</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-tags me-1"></i> Categories
+            </a>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item" href="products.html?category=Writing+materials"><i class="bi bi-pen me-2"></i> Writing Materials</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Notebooks+and+record+books"><i class="bi bi-journal-text me-2"></i> Notebooks &amp; Records</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Drawing+supplies"><i class="bi bi-brush me-2"></i> Drawing Supplies</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Laboratory+supplies"><i class="bi bi-eyedropper me-2"></i> Laboratory Supplies</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Engineering+stationery"><i class="bi bi-calculator me-2"></i> Engineering Stationery</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="products.html?category=Exam+essentials"><i class="bi bi-award me-2"></i> Exam Essentials</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="orders.html"><i class="bi bi-truck me-1"></i> Track Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html"><i class="bi bi-speedometer2 me-1"></i> Admin Portal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html">Help &amp; FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Nav Actions -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Surprise Me Button -->
+          <button type="button" class="btn btn-surprise btn-sm btn-trigger-surprise px-3" title="Pick a random stationery item">
+            <i class="bi bi-stars me-1"></i> Surprise Me!
+          </button>
+
+          <!-- Student Profile / Demo Register Modal Trigger -->
+          <button type="button" class="btn btn-outline-primary btn-sm" id="navbarUserBtn" data-bs-toggle="modal" data-bs-target="#studentRegModal">
+            <i class="bi bi-person-circle me-1"></i> Student Login
+          </button>
+
+          <!-- Shopping Cart Icon with Live Count -->
+          <a href="cart.html" class="btn btn-primary btn-sm position-relative px-3" aria-label="Shopping Cart">
+            <i class="bi bi-cart3 fs-6"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count-badge" style="display:none;">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
+            <i class="bi bi-mortarboard-fill me-1"></i> Official MLRIT College Stationery Mart
+          </span>
+          <h1 class="display-4 hero-title mb-3">
+            All Your Academic &amp; Engineering Stationery at One Campus Counter
+          </h1>
+          <p class="hero-subtitle mb-4">
+            Order lab coats, drawing mini drafters, approved scientific calculators, practical record notebooks, and semester exam kits with quick counter pickup.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <a href="products.html" class="btn btn-primary btn-lg px-4 shadow-sm">
+              <i class="bi bi-bag-check me-2"></i> Shop Stationery
+            </a>
+            <button type="button" class="btn btn-outline-dark btn-lg px-4 btn-trigger-surprise">
+              <i class="bi bi-dice-5 me-2"></i> Surprise Me
+            </button>
+            <a href="orders.html" class="btn btn-light btn-lg px-3 border">
+              <i class="bi bi-geo-alt me-1"></i> Track Order
+            </a>
+          </div>
+
+          <!-- Quick perks -->
+          <div class="row g-3 pt-2">
+            <div class="col-sm-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                <small class="fw-semibold">10-Min Fast Counter Pickup</small>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                <small class="fw-semibold">Subsidized Student Prices</small>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                <small class="fw-semibold">Exam-Compliant Supplies</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 text-center hero-img-wrapper">
+          <img src="assets/images/hero-illustration.svg" alt="College Stationery Supplies Illustration" class="img-fluid rounded-4">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-5">
+    <div class="container">
+
+      <!-- Featured Image Slider (Carousel) -->
+      <section class="mb-5">
+        <div class="section-header text-center">
+          <h2 class="h3">Current Semester Deals &amp; Featured Essentials</h2>
+          <p>Hand-picked stationery packages recommended for laboratory courses and university exams</p>
+        </div>
+
+        <div id="featuredStationeryCarousel" class="carousel slide featured-carousel" data-bs-ride="carousel" data-bs-interval="4500">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#featuredStationeryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#featuredStationeryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#featuredStationeryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          
+          <div class="carousel-inner">
+            <!-- Slide 1: B.Tech Engineering Drawing Drafter -->
+            <div class="carousel-item active" style="background: linear-gradient(135deg, #0a58ca, #0d6efd);">
+              <div class="carousel-slide-content">
+                <div class="carousel-overlay">
+                  <span class="badge bg-warning text-dark px-3 py-1 mb-2 fw-bold">1st &amp; 2nd Year Essential</span>
+                  <h2 class="display-6 fw-bold text-white mb-2">Omega Engineering Mini Drafter</h2>
+                  <p class="lead text-white-50 mb-3">Stainless steel pivot arms with 360&deg; protractor head. Packed in water-resistant canvas shoulder bag with university CAD certification.</p>
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="fs-3 fw-bold text-warning">&#8377;480</span>
+                    <span class="text-decoration-line-through text-white-50">&#8377;580</span>
+                    <button class="btn btn-warning fw-bold px-4" onclick="addToCart('STN-301', 1)">Add to Cart</button>
+                    <button class="btn btn-outline-light" onclick="openProductDetailsModal('STN-301')">View Specs</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Casio ClassWiz fx-991CW -->
+            <div class="carousel-item" style="background: linear-gradient(135deg, #1e293b, #334155);">
+              <div class="carousel-slide-content">
+                <div class="carousel-overlay">
+                  <span class="badge bg-info text-dark px-3 py-1 mb-2 fw-bold">Official Exam Model</span>
+                  <h2 class="display-6 fw-bold text-white mb-2">Casio fx-991CW Scientific Calculator</h2>
+                  <p class="lead text-white-50 mb-3">540 mathematical and engineering functions with natural 4-shade textbook display and matrix vectors. 100% permitted in university semester exams.</p>
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="fs-3 fw-bold text-info">&#8377;1,295</span>
+                    <span class="text-decoration-line-through text-white-50">&#8377;1,495</span>
+                    <button class="btn btn-info fw-bold text-dark px-4" onclick="addToCart('STN-501', 1)">Add to Cart</button>
+                    <button class="btn btn-outline-light" onclick="openProductDetailsModal('STN-501')">View Specs</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Semester End Exam Combo Kit -->
+            <div class="carousel-item" style="background: linear-gradient(135deg, #065f46, #059669);">
+              <div class="carousel-slide-content">
+                <div class="carousel-overlay">
+                  <span class="badge bg-danger px-3 py-1 mb-2 fw-bold">Save 25% Combo</span>
+                  <h2 class="display-6 fw-bold text-white mb-2">Semester Exam Survival Kit</h2>
+                  <p class="lead text-white-50 mb-3">Heavy transparent acrylic exam clipboard, 4 exam-grade ballpoint pens, transparent pouch, ruler, and non-dust eraser in a single bundle.</p>
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="fs-3 fw-bold text-warning">&#8377;210</span>
+                    <span class="text-decoration-line-through text-white-50">&#8377;280</span>
+                    <button class="btn btn-warning fw-bold px-4" onclick="addToCart('STN-603', 1)">Add to Cart</button>
+                    <button class="btn btn-outline-light" onclick="openProductDetailsModal('STN-603')">View Specs</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#featuredStationeryCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-label="Previous slide"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#featuredStationeryCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-label="Next slide"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Browse By Category Section -->
+      <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <h2 class="h3 fw-bold text-dark mb-1">Browse by Academic Department &amp; Category</h2>
+            <p class="text-muted mb-0">Select a category to view specialized stationery kits</p>
+          </div>
+          <a href="products.html" class="btn btn-outline-primary btn-sm fw-semibold">View All Items &rarr;</a>
+        </div>
+
+        <div class="row g-3">
+          <!-- 1: Writing Materials -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="products.html?category=Writing+materials" class="category-card">
+              <div class="category-icon-wrapper">
+                <img src="assets/images/category-writing.svg" alt="Writing materials">
+              </div>
+              <h6>Writing Materials</h6>
+              <small>Gel, Ball Pens &amp; Pencils</small>
+            </a>
+          </div>
+
+          <!-- 2: Notebooks & Records -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="products.html?category=Notebooks+and+record+books" class="category-card">
+              <div class="category-icon-wrapper">
+                <img src="assets/images/category-notebooks.svg" alt="Notebooks and record books">
+              </div>
+              <h6>Notebooks &amp; Records</h6>
+              <small>Spiral, Lab Records &amp; Graphs</small>
+            </a>
+          </div>
+
+          <!-- 3: Drawing Supplies -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="products.html?category=Drawing+supplies" class="category-card">
+              <div class="category-icon-wrapper">
+                <img src="assets/images/category-drawing.svg" alt="Drawing supplies">
+              </div>
+              <h6>Drawing Supplies</h6>
+              <small>Drafters, Sheets &amp; Curves</small>
+            </a>
+          </div>
+
+          <!-- 4: Laboratory Supplies -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="products.html?category=Laboratory+supplies" class="category-card">
+              <div class="category-icon-wrapper">
+                <img src="assets/images/category-lab.svg" alt="Laboratory supplies">
+              </div>
+              <h6>Laboratory Supplies</h6>
+              <small>Lab Coats, Goggles &amp; Spatulas</small>
+            </a>
+          </div>
+
+          <!-- 5: Engineering Stationery -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="products.html?category=Engineering+stationery" class="category-card">
+              <div class="category-icon-wrapper">
+                <img src="assets/images/category-engineering.svg" alt="Engineering stationery">
+              </div>
+              <h6>Engineering Tools</h6>
+              <small>Calculators, Stencils &amp; Scales</small>
+            </a>
+          </div>
+
+          <!-- 6: Exam Essentials -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="products.html?category=Exam+essentials" class="category-card">
+              <div class="category-icon-wrapper">
+                <img src="assets/images/category-exam.svg" alt="Exam essentials">
+              </div>
+              <h6>Exam Essentials</h6>
+              <small>Clipboards, Pouches &amp; Kits</small>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Popular Stationery Grid -->
+      <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <h2 class="h3 fw-bold text-dark mb-1">Campus Bestsellers &amp; Highly Demanded</h2>
+            <p class="text-muted mb-0">Everyday stationery items in high demand across departments</p>
+          </div>
+          <button type="button" class="btn btn-warning btn-sm fw-bold btn-trigger-surprise">
+            <i class="bi bi-stars"></i> Surprise Item Picker
+          </button>
+        </div>
+
+        <!-- Dynamic Product Cards Injected by JS -->
+        <div class="row g-4" id="homeBestsellersGrid">
+          <!-- Fallback items rendered via products.js on DOM ready -->
+        </div>
+      </section>
+
+      <!-- Smart Stationery Utilities Section: Quick Calculator & Bulk Cost Estimator -->
+      <section class="mb-5 p-4 rounded-4 bg-white border shadow-sm">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <span class="badge bg-primary text-white mb-2 px-3 py-1">Smart Stationery Utility</span>
+            <h3 class="fw-bold mb-3">Stationery Budget &amp; Bulk Quantity Calculator</h3>
+            <p class="text-secondary mb-4">
+              Planning to purchase record notebooks for the whole semester or supplies for your project team? Use our quick calculator to calculate exact cost, bulk quantity discounts, and campus savings.
+            </p>
+            
+            <div class="row g-3 bg-light p-3 rounded-3 border">
+              <div class="col-md-5">
+                <label for="homeCalcItemSelect" class="form-label fw-semibold small">Select Stationery Item:</label>
+                <select id="homeCalcItemSelect" class="form-select form-select-sm">
+                  <option value="160" data-name="Spiral Bound Notebook">Spiral Bound Notebook (&#8377;160)</option>
+                  <option value="95" data-name="Practical Lab Record Book">Practical Lab Record Book (&#8377;95)</option>
+                  <option value="125" data-name="Octane Gel Pen Pack">Octane Gel Pen Pack (&#8377;125)</option>
+                  <option value="480" data-name="Omega Mini Drafter">Omega Mini Drafter (&#8377;480)</option>
+                  <option value="350" data-name="College White Lab Coat">College White Lab Coat (&#8377;350)</option>
+                  <option value="85" data-name="Acrylic Exam Clipboard">Acrylic Exam Clipboard (&#8377;85)</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="homeCalcQtyInput" class="form-label fw-semibold small">Quantity:</label>
+                <input type="number" id="homeCalcQtyInput" class="form-control form-control-sm" value="4" min="1" max="100">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label fw-semibold small text-primary">Calculated Total:</label>
+                <div class="h4 text-primary fw-bold mb-0" id="homeCalcResultDisplay">&#8377;640</div>
+                <small class="text-success" id="homeCalcDiscountNote">5% bulk discount on 5+ units</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mini General Purpose Arithmetic Calculator -->
+          <div class="col-lg-5">
+            <div class="calc-widget" id="miniCalculator">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold text-dark small"><i class="bi bi-calculator me-1"></i> Quick Desk Calculator</span>
+                <span class="badge bg-secondary-subtle text-secondary small">Standard Math</span>
+              </div>
+              <div class="calc-display" id="calcDisplay">0</div>
+              <div class="calc-btn-grid">
+                <button type="button" class="calc-btn op-btn" data-val="C">C</button>
+                <button type="button" class="calc-btn op-btn" data-val="√">&radic;</button>
+                <button type="button" class="calc-btn op-btn" data-val="±">&plusmn;</button>
+                <button type="button" class="calc-btn op-btn text-primary" data-val="/">&divide;</button>
+
+                <button type="button" class="calc-btn" data-val="7">7</button>
+                <button type="button" class="calc-btn" data-val="8">8</button>
+                <button type="button" class="calc-btn" data-val="9">9</button>
+                <button type="button" class="calc-btn op-btn text-primary" data-val="*">&times;</button>
+
+                <button type="button" class="calc-btn" data-val="4">4</button>
+                <button type="button" class="calc-btn" data-val="5">5</button>
+                <button type="button" class="calc-btn" data-val="6">6</button>
+                <button type="button" class="calc-btn op-btn text-primary" data-val="-">&minus;</button>
+
+                <button type="button" class="calc-btn" data-val="1">1</button>
+                <button type="button" class="calc-btn" data-val="2">2</button>
+                <button type="button" class="calc-btn" data-val="3">3</button>
+                <button type="button" class="calc-btn op-btn text-primary" data-val="+">+</button>
+
+                <button type="button" class="calc-btn" data-val="0">0</button>
+                <button type="button" class="calc-btn" data-val=".">.</button>
+                <button type="button" class="calc-btn equal-btn" data-val="=">=</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose CampusStationery -->
+      <section class="mb-5">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">100% Exam Certified</h5>
+                <p class="text-muted small mb-0">Clipboards, calculators, and pens verified against university examination guidelines.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="bi bi-lightning-charge"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">Skip the Long Queues</h5>
+                <p class="text-muted small mb-0">Book online between lectures and collect directly at Priority Counter 1 within 10 minutes.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <i class="bi bi-piggy-bank"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">Student Subsidized Rates</h5>
+                <p class="text-muted small mb-0">Non-profit college welfare prices saving students up to 25% compared to outside retail stores.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer with College Information & Opening Hours -->
+  <footer class="footer-campus">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Store info -->
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center mb-3">
+            <img src="assets/images/logo.svg" alt="CampusStationery" style="height: 38px; filter: brightness(0) invert(1);">
+          </div>
+          <p class="small text-slate-400 mb-3">
+            The official on-campus stationery store providing student-subsidized academic materials, laboratory records, engineering equipment, and university exam kits.
+          </p>
+          <div class="small">
+            <p class="mb-1"><i class="bi bi-geo-alt text-primary me-2"></i> MLR Institute of Technology, Dundigal, Hyderabad - 500043</p>
+            <p class="mb-1"><i class="bi bi-building text-primary me-2"></i> Ground Floor, Campus Central Block (Adjacent to Canteen)</p>
+            <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i> Internal Ext: 214 | Direct: 040-29556100</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5>Stationery</h5>
+          <ul>
+            <li><a href="products.html?category=Writing+materials">Writing Pens</a></li>
+            <li><a href="products.html?category=Notebooks+and+record+books">Lab Records</a></li>
+            <li><a href="products.html?category=Drawing+supplies">Mini Drafters</a></li>
+            <li><a href="products.html?category=Laboratory+supplies">White Lab Coats</a></li>
+            <li><a href="products.html?category=Engineering+stationery">fx-991CW Calculators</a></li>
+            <li><a href="products.html?category=Exam+essentials">Exam Kits</a></li>
+          </ul>
+        </div>
+
+        <!-- Store Navigation -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5>Store Links</h5>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+            <li><a href="orders.html">Track Order Status</a></li>
+            <li><a href="admin.html">Admin Inventory Portal</a></li>
+            <li><a href="about.html">About Campus Store</a></li>
+            <li><a href="help.html">FAQ &amp; Return Policy</a></li>
+            <li><a href="contact.html">Store Timings &amp; Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Opening Hours & Viva Info -->
+        <div class="col-lg-4 col-md-6">
+          <h5>Store Operating Hours</h5>
+          <div class="bg-dark p-3 rounded-3 border border-secondary small mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Monday &ndash; Friday:</span>
+              <span class="text-white fw-bold">8:30 AM &ndash; 5:30 PM</span>
+            </div>
+            <div class="d-flex justify-content-between mb-1">
+              <span>Saturday (Working):</span>
+              <span class="text-white fw-bold">8:30 AM &ndash; 3:30 PM</span>
+            </div>
+            <div class="d-flex justify-content-between text-warning fw-semibold">
+              <span>Semester Exam Days:</span>
+              <span>8:00 AM &ndash; 6:30 PM</span>
+            </div>
+            <div class="d-flex justify-content-between text-danger mt-1">
+              <span>Sunday &amp; Public Holidays:</span>
+              <span>Closed</span>
+            </div>
+          </div>
+          <span class="badge bg-primary text-white">Campus Demo Store &bull; Web Technologies Project</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container text-center text-md-between d-md-flex justify-content-between">
+        <div>
+          &copy; 2026 CampusStationery &bull; Developed with HTML5, CSS3, Vanilla JavaScript, and Bootstrap 5.
+        </div>
+        <div>
+          <span>Client-side Storage &bull; Fast Counter Pickup</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== COMMON MODALS ==================== -->
+
+  <!-- 1. Student Registration Demo Modal -->
+  <div class="modal fade" id="studentRegModal" tabindex="-1" aria-labelledby="studentRegModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="studentRegModalLabel">
+            <i class="bi bi-person-badge me-2"></i> Student Registration &amp; Profile
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="studentRegForm" novalidate>
+          <div class="modal-body">
+            <div class="alert alert-info py-2 small mb-3">
+              <i class="bi bi-info-circle me-1"></i> Register your student profile to enable quick campus counter checkout and automatic discounts.
+            </div>
+
+            <div class="mb-3">
+              <label for="regName" class="form-label fw-semibold">Student Full Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="regName" placeholder="e.g. Rahul Sharma" required>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-md-6">
+                <label for="regEmail" class="form-label fw-semibold">College / Personal Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="regEmail" placeholder="student@mlrit.ac.in" required>
+              </div>
+              <div class="col-md-6">
+                <label for="regPhone" class="form-label fw-semibold">Mobile Number <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="regPhone" placeholder="10-digit number" maxlength="10" required>
+                <div class="form-text small">Exactly 10 digits (e.g. 9876543210)</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regPassword" class="form-label fw-semibold">Demo Password <span class="text-danger">*</span></label>
+              <input type="password" class="form-control" id="regPassword" placeholder="Minimum 6 characters" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="regDepartment" class="form-label fw-semibold">Department <span class="text-danger">*</span></label>
+              <select class="form-select" id="regDepartment" required>
+                <option value="">Select your engineering branch...</option>
+                <option value="Computer Science and Engineering">Computer Science and Engineering (CSE)</option>
+                <option value="Information Technology">Information Technology (IT)</option>
+                <option value="AI & Machine Learning">AI &amp; Machine Learning (AIML)</option>
+                <option value="Electronics & Communication">Electronics &amp; Communication (ECE)</option>
+                <option value="Electrical & Electronics">Electrical &amp; Electronics (EEE)</option>
+                <option value="Mechanical Engineering">Mechanical Engineering (MECH)</option>
+                <option value="Civil Engineering">Civil Engineering (CIVIL)</option>
+                <option value="Aeronautical Engineering">Aeronautical Engineering (AERO)</option>
+              </select>
+            </div>
+
+            <!-- Radio buttons: Year of study -->
+            <div class="mb-3" id="yearRadiosContainer">
+              <label class="form-label fw-semibold d-block">Year of Study <span class="text-danger">*</span></label>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="year1" value="1st Year" checked>
+                  <label class="form-check-label" for="year1">1st Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="year2" value="2nd Year">
+                  <label class="form-check-label" for="year2">2nd Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="year3" value="3rd Year">
+                  <label class="form-check-label" for="year3">3rd Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="year4" value="4th Year">
+                  <label class="form-check-label" for="year4">4th Year</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Checkboxes: Stationery preferences -->
+            <div class="mb-3" id="prefCheckboxesContainer">
+              <label class="form-label fw-semibold d-block">Stationery Preferences (Select any) <span class="text-danger">*</span></label>
+              <div class="row g-2">
+                <div class="col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prefCategory" value="Notebooks" id="pref1" checked>
+                    <label class="form-check-label small" for="pref1">Notebooks &amp; Records</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prefCategory" value="Pens" id="pref2" checked>
+                    <label class="form-check-label small" for="pref2">Writing Materials</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prefCategory" value="Drawing" id="pref3">
+                    <label class="form-check-label small" for="pref3">Engineering Drawing</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prefCategory" value="Lab" id="pref4">
+                    <label class="form-check-label small" for="pref4">Laboratory Supplies</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Surprise Stationery Product Modal -->
+  <div class="modal fade" id="surpriseProductModal" tabindex="-1" aria-labelledby="surpriseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title fw-bold" id="surpriseModalLabel">
+            <i class="bi bi-stars me-2"></i> Surprise Stationery Pick!
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center p-4">
+          <span class="badge bg-danger mb-2">Campus Special Lucky Recommendation</span>
+          <div class="my-3">
+            <img id="surpriseItemImage" src="" alt="Surprise Stationery" class="img-fluid rounded border" style="max-height: 180px; object-fit: contain;">
+          </div>
+          <span id="surpriseItemCategory" class="badge bg-primary-subtle text-primary mb-2">Category</span>
+          <h4 id="surpriseItemName" class="fw-bold mb-2">Product Name</h4>
+          <p id="surpriseItemDesc" class="text-muted small mb-3">Description</p>
+          <div class="display-6 fw-bold text-success mb-3" id="surpriseItemPrice">&#8377;0</div>
+          <p class="small text-muted">Use coupon code <strong>EXAM15</strong> at checkout for extra savings!</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary px-4 fw-bold" id="surpriseAddToCartBtn">
+            <i class="bi bi-cart-plus me-1"></i> Add to My Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Product Details Modal with Interactive Cost Calculator & Gallery -->
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="modalProdTitle">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <!-- Left: Gallery -->
+            <div class="col-md-5">
+              <img id="modalMainImage" src="" alt="Main Product" class="modal-product-img-main">
+              <div class="modal-thumbnails" id="modalThumbnails">
+                <!-- thumbnails injected via JS -->
+              </div>
+            </div>
+
+            <!-- Right: Details, Specs, Calculator -->
+            <div class="col-md-7">
+              <span id="modalProdCategory" class="text-primary fw-semibold small text-uppercase">Category</span>
+              <div class="d-flex align-items-baseline gap-2 my-2">
+                <span class="fs-3 fw-bold text-dark" id="modalProdPrice">&#8377;0</span>
+                <span class="text-muted text-decoration-line-through small" id="modalProdOrigPrice">&#8377;0</span>
+                <span id="modalProdBadge" class="badge badge-in-stock ms-2">In Stock</span>
+              </div>
+              <p id="modalProdDesc" class="text-secondary small mb-3">Detailed description...</p>
+
+              <h6 class="fw-bold mb-2 small text-uppercase text-muted">Specifications &amp; Features:</h6>
+              <ul class="small text-secondary ps-3 mb-3" id="modalProdSpecs">
+                <!-- specs injected via JS -->
+              </ul>
+
+              <!-- Interactive quantity & instant arithmetic calculation -->
+              <div class="p-3 bg-light rounded-3 border mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="fw-semibold small">Quantity:</span>
+                  <div class="qty-control">
+                    <button type="button" class="qty-btn" id="modalQtyMinus">&minus;</button>
+                    <input type="number" class="qty-input" id="modalQtyInput" value="1" min="1">
+                    <button type="button" class="qty-btn" id="modalQtyPlus">&plus;</button>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                  <span class="fw-bold text-dark small">Total Item Cost:</span>
+                  <span class="fs-5 fw-bold text-primary" id="modalCalcSubtotal">&#8377;0</span>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-primary flex-grow-1 fw-bold" id="modalAddToCartBtn">
+                  <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container-campus" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/utilities.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+  
+  <!-- Index Page Specific Initializer -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Render Bestsellers on Home Page
+      const bestsellersGrid = document.getElementById('homeBestsellersGrid');
+      if (bestsellersGrid && typeof getAllProducts === 'function') {
+        const allProds = getAllProducts();
+        // Select 8 top products for home showcase
+        const topProds = allProds.slice(0, 8);
+        bestsellersGrid.innerHTML = topProds.map(p => createProductCardHTML(p, 'col-12 col-sm-6 col-md-4 col-xl-3 mb-4')).join('');
+      }
+
+      // Quick Calculator logic on Home Page
+      const itemSelect = document.getElementById('homeCalcItemSelect');
+      const qtyInput = document.getElementById('homeCalcQtyInput');
+      const resultDisplay = document.getElementById('homeCalcResultDisplay');
+      const discountNote = document.getElementById('homeCalcDiscountNote');
+
+      function updateHomeCalculator() {
+        if (!itemSelect || !qtyInput || !resultDisplay) return;
+        const unitPrice = parseFloat(itemSelect.value) || 0;
+        let qty = parseInt(qtyInput.value, 10) || 1;
+        if (qty < 1) qty = 1;
+        
+        let discount = 0;
+        if (qty >= 10) {
+          discount = 10;
+          if (discountNote) discountNote.textContent = '10% bulk student discount applied!';
+        } else if (qty >= 5) {
+          discount = 5;
+          if (discountNote) discountNote.textContent = '5% bulk student discount applied!';
+        } else {
+          if (discountNote) discountNote.textContent = 'Order 5+ for 5% bulk discount';
+        }
+
+        const calc = calculateStationeryCost(unitPrice, qty, discount, 0);
+        resultDisplay.textContent = formatINR(calc.taxableAmount);
+      }
+
+      if (itemSelect && qtyInput) {
+        itemSelect.addEventListener('change', updateHomeCalculator);
+        qtyInput.addEventListener('input', updateHomeCalculator);
+        updateHomeCalculator();
+      }
+    });
+  </script>
+</body>
+</html>

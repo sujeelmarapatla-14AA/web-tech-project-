@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Stationery Products - CampusStationery</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Utility Header Bar with Dynamic Date & Time -->
+  <header class="top-bar">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <span class="live-clock-badge" id="liveClock">
+          <i class="bi bi-clock"></i> Loading campus time...
+        </span>
+        <span id="storeStatusBadge" class="badge bg-success-subtle text-success border border-success-subtle py-1 px-2">
+          <span class="pulse-indicator me-1"></span> Store Open
+        </span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span><i class="bi bi-geo-alt-fill text-warning me-1"></i> Central Block Ground Floor, Counter 1 &amp; 2</span>
+        <a href="tel:04029556100" class="d-none d-md-inline"><i class="bi bi-telephone-fill me-1"></i> 040-29556100</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-campus sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="CampusStationery Logo" class="brand-icon">
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="bi bi-house-door me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="products.html"><i class="bi bi-grid me-1"></i> All Stationery</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-tags me-1"></i> Categories
+            </a>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item" href="products.html?category=Writing+materials"><i class="bi bi-pen me-2"></i> Writing Materials</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Notebooks+and+record+books"><i class="bi bi-journal-text me-2"></i> Notebooks &amp; Records</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Drawing+supplies"><i class="bi bi-brush me-2"></i> Drawing Supplies</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Laboratory+supplies"><i class="bi bi-eyedropper me-2"></i> Laboratory Supplies</a></li>
+              <li><a class="dropdown-item" href="products.html?category=Engineering+stationery"><i class="bi bi-calculator me-2"></i> Engineering Stationery</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="products.html?category=Exam+essentials"><i class="bi bi-award me-2"></i> Exam Essentials</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="orders.html"><i class="bi bi-truck me-1"></i> Track Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html"><i class="bi bi-speedometer2 me-1"></i> Admin Portal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Store</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html">Help &amp; FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-surprise btn-sm btn-trigger-surprise px-3" title="Pick a random stationery item">
+            <i class="bi bi-stars me-1"></i> Surprise Me!
+          </button>
+          <button type="button" class="btn btn-outline-primary btn-sm" id="navbarUserBtn" data-bs-toggle="modal" data-bs-target="#studentRegModal">
+            <i class="bi bi-person-circle me-1"></i> Student Login
+          </button>
+          <a href="cart.html" class="btn btn-primary btn-sm position-relative px-3" aria-label="Shopping Cart">
+            <i class="bi bi-cart3 fs-6"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count-badge" style="display:none;">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header Breadcrumb -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Stationery Catalog</li>
+        </ol>
+      </nav>
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-2">
+        <div>
+          <h1 class="h3 fw-bold mb-1">College Stationery Catalog</h1>
+          <p class="text-muted small mb-0">Browse approved academic kits, lab records, engineering equipment, and writing supplies.</p>
+        </div>
+        <div class="mt-2 mt-md-0">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 fw-semibold" id="catalogResultsCount">
+            Showing all items
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Catalog Content -->
+  <main class="py-4">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Left Sidebar: Filters -->
+        <aside class="col-lg-3">
+          <div class="card border shadow-sm sticky-top" style="top: 85px; z-index: 10;">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+              <h5 class="fw-bold mb-0 fs-6"><i class="bi bi-funnel me-1"></i> Filters &amp; Search</h5>
+              <button type="button" class="btn btn-link btn-sm text-decoration-none p-0 text-muted" id="resetFiltersBtn">Reset All</button>
+            </div>
+            <div class="card-body">
+              
+              <!-- Search box -->
+              <div class="mb-3">
+                <label for="catalogSearchInput" class="form-label fw-semibold small">Search Products</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                  <input type="text" id="catalogSearchInput" class="form-control" placeholder="Search pens, drafters, coats...">
+                </div>
+              </div>
+
+              <hr class="my-3">
+
+              <!-- Categories Filter Radio/List -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold small mb-2">Academic Categories</label>
+                <div class="list-group list-group-flush small" id="categoryFilterList">
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active py-2" data-category="all">
+                    <span><i class="bi bi-grid-fill me-2"></i> All Categories</span>
+                    <span class="badge bg-light text-dark rounded-pill" id="badgeCountAll">16</span>
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2" data-category="Writing materials">
+                    <span><i class="bi bi-pen me-2"></i> Writing Materials</span>
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2" data-category="Notebooks and record books">
+                    <span><i class="bi bi-journal-text me-2"></i> Notebooks &amp; Records</span>
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2" data-category="Drawing supplies">
+                    <span><i class="bi bi-brush me-2"></i> Drawing Supplies</span>
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2" data-category="Laboratory supplies">
+                    <span><i class="bi bi-eyedropper me-2"></i> Laboratory Supplies</span>
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2" data-category="Engineering stationery">
+                    <span><i class="bi bi-calculator me-2"></i> Engineering Tools</span>
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2" data-category="Exam essentials">
+                    <span><i class="bi bi-award me-2"></i> Exam Essentials</span>
+                  </button>
+                </div>
+              </div>
+
+              <hr class="my-3">
+
+              <!-- Price Range Filter -->
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label for="priceRangeInput" class="form-label fw-semibold small mb-0">Max Price (&#8377;):</label>
+                  <span class="badge bg-primary" id="priceRangeValue">&#8377;1,500</span>
+                </div>
+                <input type="range" class="form-range" id="priceRangeInput" min="40" max="1500" step="10" value="1500">
+                <div class="d-flex justify-content-between text-muted" style="font-size: 0.75rem;">
+                  <span>&#8377;40</span>
+                  <span>&#8377;750</span>
+                  <span>&#8377;1,500</span>
+                </div>
+              </div>
+
+              <!-- Quick Discount Callout -->
+              <div class="alert alert-warning py-2 px-3 small mb-0 rounded-3 border-0">
+                <i class="bi bi-percent me-1"></i> Use code <strong>CAMPUS10</strong> at checkout for 10% student discount.
+              </div>
+
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Side: Sorting Toolbar & Products Grid -->
+        <section class="col-lg-9">
+          
+          <!-- Toolbar (Sort By, View Mode) -->
+          <div class="card border shadow-sm mb-4">
+            <div class="card-body py-2 d-flex flex-wrap justify-content-between align-items-center gap-3">
+              <div class="d-flex align-items-center gap-2">
+                <span class="fw-semibold small text-muted">Sort By:</span>
+                <select id="catalogSortSelect" class="form-select form-select-sm" style="width: auto;">
+                  <option value="default" selected>Recommended</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Customer Rating</option>
+                  <option value="name-asc">Product Name (A to Z)</option>
+                  <option value="stock">Stock Available (High to Low)</option>
+                </select>
+              </div>
+
+              <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-outline-warning btn-sm fw-bold btn-trigger-surprise">
+                  <i class="bi bi-dice-5 me-1"></i> Surprise Me!
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Cards Container -->
+          <div class="row g-3" id="catalogProductGrid">
+            <!-- Populated via products.js -->
+          </div>
+
+          <!-- Empty State (if no products match) -->
+          <div id="catalogEmptyState" class="text-center py-5 bg-white rounded-3 border shadow-sm" style="display: none;">
+            <i class="bi bi-search fs-1 text-muted d-block mb-3"></i>
+            <h4 class="fw-bold">No Matching Stationery Items</h4>
+            <p class="text-muted small">No items matched your current search filters or price limit.</p>
+            <button type="button" class="btn btn-outline-primary btn-sm px-4" onclick="document.getElementById('resetFiltersBtn').click()">
+              Reset Filters
+            </button>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-campus">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <img src="assets/images/logo.svg" alt="CampusStationery" style="height: 38px; filter: brightness(0) invert(1);" class="mb-3">
+          <p class="small text-slate-400 mb-3">
+            CampusStationery ensures all students have quick access to university-prescribed laboratory records, drafting supplies, and stationery essentials.
+          </p>
+          <div class="small">
+            <p class="mb-1"><i class="bi bi-geo-alt text-primary me-2"></i> Ground Floor, Campus Central Block, MLRIT</p>
+            <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i> Extension 214 &bull; 040-29556100</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5>Stationery</h5>
+          <ul>
+            <li><a href="products.html?category=Writing+materials">Writing Pens</a></li>
+            <li><a href="products.html?category=Notebooks+and+record+books">Lab Records</a></li>
+            <li><a href="products.html?category=Drawing+supplies">Mini Drafters</a></li>
+            <li><a href="products.html?category=Laboratory+supplies">White Lab Coats</a></li>
+            <li><a href="products.html?category=Engineering+stationery">Calculators</a></li>
+            <li><a href="products.html?category=Exam+essentials">Exam Kits</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5>Store Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+            <li><a href="orders.html">Track Orders</a></li>
+            <li><a href="admin.html">Admin Portal</a></li>
+            <li><a href="about.html">About Store</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h5>Store Timings</h5>
+          <div class="bg-dark p-3 rounded-3 border border-secondary small">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Mon &ndash; Fri:</span>
+              <span class="text-white fw-bold">8:30 AM &ndash; 5:30 PM</span>
+            </div>
+            <div class="d-flex justify-content-between mb-1">
+              <span>Saturday:</span>
+              <span class="text-white fw-bold">8:30 AM &ndash; 3:30 PM</span>
+            </div>
+            <div class="d-flex justify-content-between text-warning fw-semibold">
+              <span>Exam Weeks:</span>
+              <span>8:00 AM &ndash; 6:30 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container text-center text-md-between d-md-flex justify-content-between">
+        <div>&copy; 2026 CampusStationery &bull; Built with HTML5, CSS3, Vanilla JS, Bootstrap 5.</div>
+        <div><span>College Stationery Management System</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS ==================== -->
+  
+  <!-- 1. Student Registration Demo Modal -->
+  <div class="modal fade" id="studentRegModal" tabindex="-1" aria-labelledby="studentRegModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="studentRegModalLabel">
+            <i class="bi bi-person-badge me-2"></i> Student Registration &amp; Profile
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="studentRegForm" novalidate>
+          <div class="modal-body">
+            <div class="alert alert-info py-2 small mb-3">
+              <i class="bi bi-info-circle me-1"></i> Register your student profile to enable quick campus counter checkout and automatic discounts.
+            </div>
+
+            <div class="mb-3">
+              <label for="regName" class="form-label fw-semibold">Student Full Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="regName" placeholder="e.g. Rahul Sharma" required>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-md-6">
+                <label for="regEmail" class="form-label fw-semibold">College / Personal Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="regEmail" placeholder="student@mlrit.ac.in" required>
+              </div>
+              <div class="col-md-6">
+                <label for="regPhone" class="form-label fw-semibold">Mobile Number <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="regPhone" placeholder="10-digit number" maxlength="10" required>
+                <div class="form-text small">Exactly 10 digits (e.g. 9876543210)</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regPassword" class="form-label fw-semibold">Demo Password <span class="text-danger">*</span></label>
+              <input type="password" class="form-control" id="regPassword" placeholder="Minimum 6 characters" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="regDepartment" class="form-label fw-semibold">Department <span class="text-danger">*</span></label>
+              <select class="form-select" id="regDepartment" required>
+                <option value="">Select your engineering branch...</option>
+                <option value="Computer Science and Engineering">Computer Science and Engineering (CSE)</option>
+                <option value="Information Technology">Information Technology (IT)</option>
+                <option value="AI & Machine Learning">AI &amp; Machine Learning (AIML)</option>
+                <option value="Electronics & Communication">Electronics &amp; Communication (ECE)</option>
+                <option value="Electrical & Electronics">Electrical &amp; Electronics (EEE)</option>
+                <option value="Mechanical Engineering">Mechanical Engineering (MECH)</option>
+                <option value="Civil Engineering">Civil Engineering (CIVIL)</option>
+                <option value="Aeronautical Engineering">Aeronautical Engineering (AERO)</option>
+              </select>
+            </div>
+
+            <div class="mb-3" id="yearRadiosContainer">
+              <label class="form-label fw-semibold d-block">Year of Study <span class="text-danger">*</span></label>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="pYear1" value="1st Year" checked>
+                  <label class="form-check-label" for="pYear1">1st Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="pYear2" value="2nd Year">
+                  <label class="form-check-label" for="pYear2">2nd Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="pYear3" value="3rd Year">
+                  <label class="form-check-label" for="pYear3">3rd Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="studentYear" id="pYear4" value="4th Year">
+                  <label class="form-check-label" for="pYear4">4th Year</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3" id="prefCheckboxesContainer">
+              <label class="form-label fw-semibold d-block">Stationery Preferences <span class="text-danger">*</span></label>
+              <div class="row g-2">
+                <div class="col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prefCategory" value="Notebooks" id="pPref1" checked>
+                    <label class="form-check-label small" for="pPref1">Notebooks &amp; Records</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="prefCategory" value="Pens" id="pPref2" checked>
+                    <label class="form-check-label small" for="pPref2">Writing Materials</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Surprise Product Modal -->
+  <div class="modal fade" id="surpriseProductModal" tabindex="-1" aria-labelledby="surpriseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title fw-bold" id="surpriseModalLabel"><i class="bi bi-stars me-2"></i> Surprise Stationery Pick!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center p-4">
+          <div class="my-3">
+            <img id="surpriseItemImage" src="" alt="Surprise Stationery" class="img-fluid rounded border" style="max-height: 180px; object-fit: contain;">
+          </div>
+          <span id="surpriseItemCategory" class="badge bg-primary-subtle text-primary mb-2">Category</span>
+          <h4 id="surpriseItemName" class="fw-bold mb-2">Product Name</h4>
+          <p id="surpriseItemDesc" class="text-muted small mb-3">Description</p>
+          <div class="display-6 fw-bold text-success mb-3" id="surpriseItemPrice">&#8377;0</div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary px-4 fw-bold" id="surpriseAddToCartBtn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Product Details Modal -->
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="modalProdTitle">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-md-5">
+              <img id="modalMainImage" src="" alt="Main Product" class="modal-product-img-main">
+              <div class="modal-thumbnails" id="modalThumbnails"></div>
+            </div>
+            <div class="col-md-7">
+              <span id="modalProdCategory" class="text-primary fw-semibold small text-uppercase">Category</span>
+              <div class="d-flex align-items-baseline gap-2 my-2">
+                <span class="fs-3 fw-bold text-dark" id="modalProdPrice">&#8377;0</span>
+                <span class="text-muted text-decoration-line-through small" id="modalProdOrigPrice">&#8377;0</span>
+                <span id="modalProdBadge" class="badge badge-in-stock ms-2">In Stock</span>
+              </div>
+              <p id="modalProdDesc" class="text-secondary small mb-3">Detailed description...</p>
+              <h6 class="fw-bold mb-2 small text-uppercase text-muted">Specifications &amp; Features:</h6>
+              <ul class="small text-secondary ps-3 mb-3" id="modalProdSpecs"></ul>
+
+              <div class="p-3 bg-light rounded-3 border mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="fw-semibold small">Quantity:</span>
+                  <div class="qty-control">
+                    <button type="button" class="qty-btn" id="modalQtyMinus">&minus;</button>
+                    <input type="number" class="qty-input" id="modalQtyInput" value="1" min="1">
+                    <button type="button" class="qty-btn" id="modalQtyPlus">&plus;</button>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                  <span class="fw-bold text-dark small">Total Item Cost:</span>
+                  <span class="fs-5 fw-bold text-primary" id="modalCalcSubtotal">&#8377;0</span>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-primary flex-grow-1 fw-bold" id="modalAddToCartBtn">
+                  <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container-campus" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/utilities.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Products Catalog Controller -->
+  <script>
+    let activeCategory = 'all';
+
+    function setCategoryFilter(category) {
+      activeCategory = category;
+      const listGroup = document.getElementById('categoryFilterList');
+      if (listGroup) {
+        listGroup.querySelectorAll('.list-group-item').forEach(item => {
+          if (item.getAttribute('data-category') === category) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const searchInput = document.getElementById('catalogSearchInput');
+      const sortSelect = document.getElementById('catalogSortSelect');
+      const priceRange = document.getElementById('priceRangeInput');
+      const grid = document.getElementById('catalogProductGrid');
+      const emptyState = document.getElementById('catalogEmptyState');
+      const resultsCount = document.getElementById('catalogResultsCount');
+
+      const searchTerm = searchInput ? searchInput.value.trim() : '';
+      const sortOption = sortSelect ? sortSelect.value : 'default';
+      const maxPrice = priceRange ? parseFloat(priceRange.value) : 1500;
+
+      const filtered = filterAndSortProducts(activeCategory, searchTerm, sortOption, maxPrice);
+
+      if (resultsCount) {
+        resultsCount.textContent = `Showing ${filtered.length} stationery items`;
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.style.display = 'block';
+      } else {
+        emptyState.style.display = 'none';
+        grid.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check query param for category
+      const urlParams = new URLSearchParams(window.location.search);
+      const catParam = urlParams.get('category');
+      if (catParam) {
+        activeCategory = catParam;
+      }
+
+      // Initialize category sidebar active item
+      const listGroup = document.getElementById('categoryFilterList');
+      if (listGroup) {
+        listGroup.querySelectorAll('.list-group-item').forEach(item => {
+          if (item.getAttribute('data-category') === activeCategory) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+
+          item.addEventListener('click', () => {
+            const cat = item.getAttribute('data-category');
+            setCategoryFilter(cat);
+          });
+        });
+      }
+
+      // Filter events
+      const searchInput = document.getElementById('catalogSearchInput');
+      const sortSelect = document.getElementById('catalogSortSelect');
+      const priceRange = document.getElementById('priceRangeInput');
+      const priceValue = document.getElementById('priceRangeValue');
+      const resetBtn = document.getElementById('resetFiltersBtn');
+
+      if (searchInput) searchInput.addEventListener('input', renderCatalog);
+      if (sortSelect) sortSelect.addEventListener('change', renderCatalog);
+      
+      if (priceRange && priceValue) {
+        priceRange.addEventListener('input', () => {
+          priceValue.textContent = formatINR(priceRange.value);
+          renderCatalog();
+        });
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          if (sortSelect) sortSelect.value = 'default';
+          if (priceRange) {
+            priceRange.value = 1500;
+            priceValue.textContent = formatINR(1500);
+          }
+          setCategoryFilter('all');
+        });
+      }
+
+      renderCatalog();
+    });
+  </script>
+</body>
+</html>

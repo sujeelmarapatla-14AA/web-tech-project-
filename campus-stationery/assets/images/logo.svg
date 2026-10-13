@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="300" height="80">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d6efd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a58ca;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc107;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fd7e14;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Icon Group -->
+  <g transform="translate(10, 12)">
+    <!-- Book/Notebook -->
+    <rect x="0" y="4" width="38" height="50" rx="4" fill="url(#grad1)" />
+    <path d="M6 10 h26 M6 18 h26 M6 26 h18" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- Bookmark ribbon -->
+    <path d="M24 4 v20 l5 -5 l5 5 v-20 Z" fill="url(#accent)" />
+    <!-- Pencil slanted across -->
+    <g transform="translate(28, 8) rotate(35)">
+      <rect x="0" y="0" width="10" height="42" rx="2" fill="#ffc107" stroke="#ffffff" stroke-width="1.5" />
+      <path d="M0 42 L5 52 L10 42 Z" fill="#212529" />
+      <polygon points="3,48 5,52 7,48" fill="#111" />
+      <rect x="0" y="0" width="10" height="7" rx="1" fill="#dc3545" />
+    </g>
+  </g>
+  <!-- Text Brand -->
+  <text x="74" y="38" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d6efd">
+    Campus<tspan fill="#ffc107">Stationery</tspan>
+  </text>
+  <text x="75" y="55" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#6c757d" letter-spacing="1.5">
+    COLLEGE STORE &amp; SUPPLIES
+  </text>
+</svg>

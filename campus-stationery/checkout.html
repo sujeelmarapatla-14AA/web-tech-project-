@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - CampusStationery</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Utility Header Bar with Dynamic Date & Time -->
+  <header class="top-bar">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <span class="live-clock-badge" id="liveClock">
+          <i class="bi bi-clock"></i> Loading campus time...
+        </span>
+        <span id="storeStatusBadge" class="badge bg-success-subtle text-success border border-success-subtle py-1 px-2">
+          <span class="pulse-indicator me-1"></span> Store Open
+        </span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span><i class="bi bi-geo-alt-fill text-warning me-1"></i> Central Block Ground Floor, Counter 1 &amp; 2</span>
+        <a href="tel:04029556100" class="d-none d-md-inline"><i class="bi bi-telephone-fill me-1"></i> 040-29556100</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-campus sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="CampusStationery Logo" class="brand-icon">
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">All Stationery</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="orders.html">Track Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin.html">Admin Portal</a></li>
+          <li class="nav-item"><a class="nav-link" href="help.html">Help &amp; FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-outline-primary btn-sm" id="navbarUserBtn" data-bs-toggle="modal" data-bs-target="#studentRegModal">
+            <i class="bi bi-person-circle me-1"></i> Student Login
+          </button>
+          <a href="cart.html" class="btn btn-primary btn-sm position-relative px-3" aria-label="Shopping Cart">
+            <i class="bi bi-cart3 fs-6"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count-badge" style="display:none;">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header Breadcrumb -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+        </ol>
+      </nav>
+      <h1 class="h3 fw-bold mt-2 mb-0">Stationery Order Checkout</h1>
+    </div>
+  </div>
+
+  <!-- Main Checkout Container -->
+  <main class="py-4">
+    <div class="container">
+      
+      <!-- 1. CHECKOUT FORM SECTION -->
+      <div id="checkoutMainSection">
+        <div class="row g-4">
+          
+          <!-- Left Column: Student Details & Payment Form -->
+          <div class="col-lg-7">
+            <div class="card border shadow-sm mb-4">
+              <div class="card-header bg-white py-3">
+                <h5 class="fw-bold mb-0 fs-6 text-primary"><i class="bi bi-person-lines-fill me-2"></i> 1. Student Identification &amp; Contact</h5>
+              </div>
+              <div class="card-body">
+                <form id="checkoutForm" novalidate>
+                  
+                  <div class="row g-3 mb-3">
+                    <div class="col-md-7">
+                      <label for="checkoutName" class="form-label fw-semibold small">Student Full Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="checkoutName" placeholder="Full name as per college ID" required>
+                    </div>
+                    <div class="col-md-5">
+                      <label for="checkoutRoll" class="form-label fw-semibold small">Roll / Hall Ticket No. <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control text-uppercase" id="checkoutRoll" placeholder="e.g. 23951A0501" required>
+                    </div>
+                  </div>
+
+                  <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                      <label for="checkoutEmail" class="form-label fw-semibold small">Email Address <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" id="checkoutEmail" placeholder="student@mlrit.ac.in" required>
+                      <div class="form-text small">Receipt will be linked to this email</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="checkoutPhone" class="form-label fw-semibold small">Mobile Number <span class="text-danger">*</span></label>
+                      <input type="tel" class="form-control" id="checkoutPhone" placeholder="10-digit Indian Mobile" maxlength="10" required>
+                      <div class="form-text small">Must start with 6-9 (10 digits)</div>
+                    </div>
+                  </div>
+
+                  <div class="row g-3 mb-4">
+                    <div class="col-md-7">
+                      <label for="checkoutDept" class="form-label fw-semibold small">Department <span class="text-danger">*</span></label>
+                      <select class="form-select" id="checkoutDept" required>
+                        <option value="">Select your department...</option>
+                        <option value="Computer Science and Engineering">Computer Science &amp; Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="AI & Machine Learning">AI &amp; Machine Learning</option>
+                        <option value="Electronics & Communication">Electronics &amp; Communication</option>
+                        <option value="Electrical & Electronics">Electrical &amp; Electronics</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Aeronautical Engineering">Aeronautical Engineering</option>
+                      </select>
+                    </div>
+                    <div class="col-md-5">
+                      <label for="checkoutYear" class="form-label fw-semibold small">Academic Year <span class="text-danger">*</span></label>
+                      <select class="form-select" id="checkoutYear" required>
+                        <option value="1st Year">1st Year (Fresher)</option>
+                        <option value="2nd Year" selected>2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year (Final)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <h5 class="fw-bold mb-3 fs-6 text-primary border-top pt-3"><i class="bi bi-geo-alt-fill me-2"></i> 2. Campus Collection Point</h5>
+                  
+                  <div class="mb-3">
+                    <label for="checkoutPickupPoint" class="form-label fw-semibold small">Select Collection Counter / Drop Point <span class="text-danger">*</span></label>
+                    <select class="form-select" id="checkoutPickupPoint" required>
+                      <option value="Counter 1 (Main Stationery Store, Ground Floor)">Counter 1 (Main Stationery Store &bull; Central Block Ground Floor)</option>
+                      <option value="Counter 2 (Drawing & Lab Supplies, Central Block)">Counter 2 (Drawing &amp; Lab Supplies &bull; Central Block)</option>
+                      <option value="Central Library Reception Desk">Central Library Reception Desk (1st Floor)</option>
+                      <option value="Boy's Hostel Block A Gate Desk">Boy's Hostel Block A Gate Desk (Evening 6 PM Drop)</option>
+                      <option value="Girl's Hostel Block 1 Reception">Girl's Hostel Block 1 Reception (Evening 6 PM Drop)</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="checkoutNotes" class="form-label fw-semibold small">Order Notes / Urgent Examination Instructions (Optional)</label>
+                    <input type="text" class="form-control" id="checkoutNotes" placeholder="e.g. Need blue gel pen specifically, or urgent 2 PM lab exam">
+                  </div>
+
+                  <h5 class="fw-bold mb-3 fs-6 text-primary border-top pt-3"><i class="bi bi-wallet2 me-2"></i> 3. Demo Payment Option</h5>
+                  
+                  <div class="mb-3" id="paymentMethodContainer">
+                    <div class="border rounded-3 p-3 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="payCash" value="Cash on Campus Collection" checked>
+                        <label class="form-check-label fw-bold" for="payCash">
+                          <i class="bi bi-cash-stack text-success me-1"></i> Cash on Campus Collection (Counter Pay)
+                        </label>
+                        <div class="small text-muted mt-1" id="cashPaymentDetails">
+                          Pay by cash directly at Stationery Counter 1 when collecting your items. Keep exact change handy for fast service.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="border rounded-3 p-3 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="payUPI" value="UPI Demo Payment">
+                        <label class="form-check-label fw-bold" for="payUPI">
+                          <i class="bi bi-qr-code-scan text-primary me-1"></i> UPI Demo Payment (PhonePe / GPay / Paytm)
+                        </label>
+                        <div class="small text-muted mt-1" id="upiPaymentDetails" style="display: none;">
+                          <div class="p-2 bg-light rounded border mt-2 d-flex align-items-center gap-3">
+                            <div class="bg-white p-2 rounded border text-center">
+                              <i class="bi bi-qr-code fs-1 text-dark"></i>
+                            </div>
+                            <div>
+                              <div class="fw-bold text-dark">VPA: campusstationery@mlrit</div>
+                              <small class="text-secondary">Simulated Instant UPI Demo Transaction</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="border rounded-3 p-3 mb-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="payCard" value="College ID Card / Student Wallet">
+                        <label class="form-check-label fw-bold" for="payCard">
+                          <i class="bi bi-credit-card-2-front text-info me-1"></i> College ID Card / Student Smart Card
+                        </label>
+                        <div class="small text-muted mt-1" id="cardPaymentDetails" style="display: none;">
+                          Your registered student RFID card balance will be debited upon tapping at Counter 1.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="checkoutTerms" required checked>
+                    <label class="form-check-label small" for="checkoutTerms">
+                      I declare that the supplied student details are genuine and I will collect the materials from the campus counter. <span class="text-danger">*</span>
+                    </label>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow-sm" id="placeOrderBtn">
+                    <i class="bi bi-check2-circle me-2"></i> Confirm &amp; Place Demo Order
+                  </button>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Live Order Review Summary -->
+          <div class="col-lg-5">
+            <div class="card border shadow-sm sticky-top" style="top: 85px;">
+              <div class="card-header bg-white py-3">
+                <h5 class="fw-bold mb-0 fs-6"><i class="bi bi-cart-check me-2"></i> Order Items Review</h5>
+              </div>
+              <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="checkoutSummaryItems">
+                  <!-- Populated via checkout.js -->
+                </ul>
+              </div>
+              <div class="card-body border-top bg-light">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-secondary">Subtotal:</span>
+                  <span class="fw-bold text-dark" id="checkoutSubtotal">&#8377;0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2 text-success" id="checkoutDiscountRow" style="display: none;">
+                  <span>Discount:</span>
+                  <span class="fw-bold" id="checkoutDiscount">- &#8377;0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span class="text-secondary">Packaging &amp; Handling:</span>
+                  <span class="fw-semibold text-dark" id="checkoutHandling">FREE</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-baseline pt-2 border-top">
+                  <span class="h5 fw-bold mb-0">Total Due:</span>
+                  <span class="h3 fw-bold text-primary mb-0" id="checkoutTotal">&#8377;0</span>
+                </div>
+              </div>
+              <div class="card-footer bg-white py-3 text-center">
+                <a href="cart.html" class="small text-decoration-none">
+                  <i class="bi bi-pencil me-1"></i> Edit Cart Items
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2. ORDER CONFIRMATION RECEIPT (Initially hidden, shown after order placed) -->
+      <div id="orderConfirmationSection" style="display: none;">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card border shadow receipt-card mb-4">
+              <div class="card-header bg-success text-white py-3 text-center">
+                <i class="bi bi-check-circle-fill display-4 d-block mb-2"></i>
+                <h2 class="h3 fw-bold mb-0">Order Placed Successfully!</h2>
+                <p class="small text-white-50 mb-0">Your stationery materials have been reserved in campus stock.</p>
+              </div>
+              
+              <div class="card-body p-4">
+                
+                <div class="row g-3 mb-4 p-3 bg-light rounded-3 border">
+                  <div class="col-sm-6">
+                    <small class="text-muted d-block">Order Reference ID</small>
+                    <span class="fs-4 fw-bold text-primary" id="receiptOrderId">CS-ORD-2026-0000</span>
+                  </div>
+                  <div class="col-sm-6 text-sm-end">
+                    <small class="text-muted d-block">Order Placed On</small>
+                    <span class="fw-semibold text-dark" id="receiptDateTime">Date &amp; Time</span>
+                  </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-sm-6">
+                    <h6 class="fw-bold text-uppercase small text-muted">Student Details</h6>
+                    <div class="fw-bold" id="receiptCustomerName">Student Name</div>
+                    <div class="small text-muted" id="receiptCustomerRoll">Roll Number</div>
+                    <div class="small text-muted" id="receiptCustomerDept">Department</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h6 class="fw-bold text-uppercase small text-muted">Collection &amp; Payment</h6>
+                    <div class="small fw-semibold text-dark mb-1">
+                      <i class="bi bi-geo-alt-fill text-danger me-1"></i> <span id="receiptPickupPoint">Pickup Point</span>
+                    </div>
+                    <div class="small text-muted mb-1">
+                      <i class="bi bi-credit-card me-1"></i> <span id="receiptPaymentMethod">Payment Method</span>
+                    </div>
+                    <div class="small text-success fw-bold">
+                      <i class="bi bi-shield-check me-1"></i> Inventory Stock Reserved
+                    </div>
+                  </div>
+                </div>
+
+                <h6 class="fw-bold mb-2">Reserved Stationery Items</h6>
+                <div class="table-responsive mb-4">
+                  <table class="table table-bordered table-sm align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Stationery Item</th>
+                        <th class="text-center" style="width: 80px;">Qty</th>
+                        <th class="text-end" style="width: 100px;">Price</th>
+                        <th class="text-end" style="width: 110px;">Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody id="receiptItemsBody">
+                      <!-- items injected -->
+                    </tbody>
+                    <tfoot>
+                      <tr class="fw-bold table-light">
+                        <td colspan="3" class="text-end">Total Amount:</td>
+                        <td class="text-end text-primary" id="receiptTotalAmount">&#8377;0</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+                <!-- Pickup QR illustration -->
+                <div class="p-3 border rounded-3 bg-light text-center mb-4">
+                  <i class="bi bi-qr-code fs-1 text-primary d-block mb-1"></i>
+                  <small class="text-muted d-block">Show this receipt or mention your Order ID at <strong>Counter 1</strong> to collect your items.</small>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-center gap-3 btn-no-print">
+                  <button type="button" class="btn btn-outline-secondary" onclick="window.print()">
+                    <i class="bi bi-printer me-1"></i> Print Receipt
+                  </button>
+                  <a href="orders.html" class="btn btn-primary fw-semibold" id="receiptTrackOrderBtn">
+                    <i class="bi bi-truck me-1"></i> Track Live Status in Orders
+                  </a>
+                  <a href="index.html" class="btn btn-light border">
+                    <i class="bi bi-house me-1"></i> Return Home
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-campus">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <img src="assets/images/logo.svg" alt="CampusStationery" style="height: 38px; filter: brightness(0) invert(1);" class="mb-3">
+          <p class="small text-slate-400">CampusStationery facilitates organized academic stationery distribution across college departments.</p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <div class="small text-slate-400">
+            <div>MLR Institute of Technology Campus Store</div>
+            <div>Central Block Ground Floor &bull; 040-29556100</div>
+          </div>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <div class="small text-slate-400">
+            <div>Counter Timings: Mon-Sat 8:30 AM &ndash; 5:30 PM</div>
+            <div class="text-warning">Exam Days: Open early from 8:00 AM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container text-center">
+        &copy; 2026 CampusStationery &bull; Built with HTML5, CSS3, Vanilla JS, Bootstrap 5.
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container-campus" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/utilities.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initCheckoutPage();
+    });
+  </script>
+</body>
+</html>

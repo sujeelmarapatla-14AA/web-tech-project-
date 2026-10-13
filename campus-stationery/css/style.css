@@ -1,0 +1,1363 @@
+/* ==========================================================================
+   CampusStationery - Master Stylesheet
+   College Stationery Management System
+   Theme: Refined Academic Blue, Clean White & Subtle Slate Gray
+   WCAG AA Compliant, Fully Responsive (320px - 1920px), Modern UI/UX
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design System Tokens & CSS Variables
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand Primary Colors */
+  --primary-color: #0d6efd;
+  --primary-hover: #0b5ed7;
+  --primary-dark: #0a58ca;
+  --primary-light: #eff6ff;
+  --primary-subtle: #dbeafe;
+  --primary-border: #bfdbfe;
+
+  /* Neutral & Slate Palette */
+  --secondary-color: #475569;
+  --secondary-hover: #334155;
+  --secondary-light: #f1f5f9;
+  --text-dark: #0f172a;
+  --text-body: #1e293b;
+  --text-muted: #475569;
+  --text-light: #94a3b8;
+  --border-color: #e2e8f0;
+  --border-subtle: #cbd5e1;
+
+  /* Accent & Status Colors */
+  --accent-color: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-light: #fef3c7;
+  --success-color: #16a34a;
+  --success-light: #dcfce7;
+  --warning-color: #ea580c;
+  --warning-light: #ffedd5;
+  --danger-color: #dc2626;
+  --danger-light: #fee2e2;
+  --info-color: #0284c7;
+  --info-light: #e0f2fe;
+
+  /* Surfaces & Backgrounds */
+  --bg-light: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --surface-white: #ffffff;
+  --surface-elevated: #ffffff;
+
+  /* Shadows (Multi-layer elevation system) */
+  --shadow-xs: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.10);
+  --shadow-xl: 0 20px 40px rgba(15, 23, 42, 0.14);
+  --card-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+  --card-shadow-hover: 0 12px 28px rgba(13, 110, 253, 0.12);
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Accessible Focus Indicator */
+  --focus-ring: 0 0 0 3px rgba(13, 110, 253, 0.28);
+}
+
+/* --------------------------------------------------------------------------
+   2. Global Reset, Typography & Base Elements
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-body);
+  background-color: var(--bg-light);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* Universal Text Selection */
+::selection {
+  background-color: var(--primary-subtle);
+  color: var(--primary-dark);
+}
+
+/* Fluid Heading Scale */
+h1, .h1 {
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+h2, .h2 {
+  font-size: clamp(1.4rem, 2vw + 0.5rem, 2rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+h3, .h3 {
+  font-size: clamp(1.2rem, 1.5vw + 0.5rem, 1.6rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+h4, .h4 {
+  font-size: clamp(1.05rem, 1vw + 0.5rem, 1.3rem);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+h5, .h5 {
+  font-size: clamp(0.95rem, 0.8vw + 0.5rem, 1.15rem);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+h6, .h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Accessible Interactive Hyperlinks */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--primary-dark);
+}
+
+/* Prevent visited links from turning jarring purple across the app */
+a:visited {
+  color: inherit;
+}
+
+a.text-primary:visited,
+.product-title a:visited,
+.category-card:visited {
+  color: var(--primary-color);
+}
+
+.footer-campus a:visited {
+  color: #94a3b8;
+}
+
+/* Universal Keyboard Focus Ring */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* --------------------------------------------------------------------------
+   3. Top Utility Header Bar
+   -------------------------------------------------------------------------- */
+.top-bar {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  font-size: 0.825rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+.top-bar a {
+  color: #e2e8f0;
+}
+
+.top-bar a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.live-clock-badge {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 rgba(34, 197, 94, 0.6);
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   4. Navbar & Navigation Elements (Glassmorphic & Sleek)
+   -------------------------------------------------------------------------- */
+.navbar-campus {
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  padding: 0.75rem 0;
+  transition: var(--transition-smooth);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--primary-color) !important;
+  letter-spacing: -0.3px;
+  padding: 0;
+  margin-right: 1.25rem;
+}
+
+.brand-icon {
+  height: 38px;
+  width: auto;
+  max-width: 175px;
+  object-fit: contain;
+  transition: transform var(--transition-fast);
+}
+
+.navbar-brand:hover .brand-icon {
+  transform: scale(1.03);
+}
+
+.brand-text span {
+  color: #fd7e14;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 600;
+  font-size: 0.925rem;
+  color: var(--secondary-color) !important;
+  padding: 0.45rem 0.85rem !important;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--primary-color) !important;
+  background-color: var(--primary-light);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--primary-color) !important;
+  background-color: var(--primary-light);
+  font-weight: 700;
+}
+
+.navbar-toggler {
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.navbar-toggler:focus {
+  box-shadow: var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+/* Right-side Navbar Actions */
+.cart-badge-pill {
+  font-size: 0.75rem;
+  position: absolute;
+  top: -6px;
+  right: -8px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Hero Section
+   -------------------------------------------------------------------------- */
+.hero-section {
+  background: radial-gradient(100% 100% at 50% 0%, #eff6ff 0%, #f8fafc 100%);
+  border-bottom: 1px solid var(--border-color);
+  padding: clamp(2.75rem, 5.5vw, 4.25rem) 0 clamp(2.25rem, 4.5vw, 3.75rem) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -60px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  font-size: clamp(1.85rem, 3.5vw + 0.5rem, 2.85rem);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 1.2vw + 0.4rem, 1.2rem);
+  color: var(--secondary-color);
+  max-width: 650px;
+}
+
+.hero-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img-wrapper img {
+  max-height: clamp(230px, 35vw, 350px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(13, 110, 253, 0.12));
+}
+
+/* --------------------------------------------------------------------------
+   6. Academic Category Cards
+   -------------------------------------------------------------------------- */
+.category-card {
+  background: var(--surface-white);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: clamp(0.95rem, 2vw, 1.35rem);
+  text-align: center;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  text-decoration: none;
+  position: relative;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(13, 110, 253, 0.12);
+  border-color: #93c5fd;
+  text-decoration: none;
+}
+
+.category-icon-wrapper {
+  width: clamp(54px, 10vw, 70px);
+  height: clamp(54px, 10vw, 70px);
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  transition: var(--transition-smooth);
+  flex-shrink: 0;
+}
+
+.category-card:hover .category-icon-wrapper {
+  background: var(--primary-light);
+  transform: scale(1.08);
+}
+
+.category-icon-wrapper img {
+  width: clamp(34px, 6vw, 44px);
+  height: clamp(34px, 6vw, 44px);
+  object-fit: contain;
+}
+
+.category-card h6 {
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+  font-size: clamp(0.85rem, 1.5vw, 0.975rem);
+  line-height: 1.3;
+}
+
+.category-card small {
+  color: var(--text-muted);
+  font-size: clamp(0.725rem, 1.2vw, 0.8rem);
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   7. Product Cards & Catalog Grid
+   -------------------------------------------------------------------------- */
+.product-card {
+  background: var(--surface-white);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(13, 110, 253, 0.12);
+  border-color: #93c5fd;
+}
+
+.product-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.32rem 0.65rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.product-img-container {
+  height: clamp(165px, 22vw, 195px);
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.15rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.product-img-container img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+}
+
+.product-card:hover .product-img-container img {
+  transform: scale(1.08);
+}
+
+.product-card-body {
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-category-label {
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.product-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.45rem;
+  line-height: 1.35;
+  min-height: 2.7rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-title a:hover {
+  color: var(--primary-color);
+}
+
+.product-rating {
+  font-size: 0.8rem;
+  color: #f59e0b;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.product-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.product-original-price {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.product-stock-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.product-card-footer {
+  margin-top: auto;
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.product-card-footer .btn {
+  font-size: 0.825rem;
+  padding: 0.4rem 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   8. Feature Boxes / Benefit Cards
+   -------------------------------------------------------------------------- */
+.benefit-card {
+  background: var(--surface-white);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  height: 100%;
+  transition: var(--transition-fast);
+}
+
+.benefit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+.benefit-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Section Header Typography */
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+.section-header p {
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   9. Featured Carousel Slider
+   -------------------------------------------------------------------------- */
+.featured-carousel {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.featured-carousel .carousel-item {
+  min-height: 380px;
+  background-color: #1e293b;
+}
+
+.carousel-slide-content {
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  color: #ffffff;
+  position: relative;
+}
+
+.carousel-slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+}
+
+.carousel-overlay {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.carousel-overlay h2 {
+  font-size: clamp(1.35rem, 2.5vw + 0.5rem, 2.25rem);
+  line-height: 1.25;
+}
+
+.carousel-overlay p.lead {
+  font-size: clamp(0.925rem, 1.2vw + 0.3rem, 1.15rem);
+}
+
+.carousel-overlay .d-flex.align-items-center.gap-3 {
+  flex-wrap: wrap;
+  gap: 0.75rem !important;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+/* --------------------------------------------------------------------------
+   10. Tables & Cart System
+   -------------------------------------------------------------------------- */
+.table-campus {
+  background: var(--surface-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0;
+}
+
+.table-campus th {
+  background-color: var(--bg-subtle);
+  color: #334155;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+  padding: 0.85rem 1rem;
+}
+
+.table-campus td {
+  vertical-align: middle;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-responsive {
+  border-radius: var(--radius-md);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Cart & Quantity Controls */
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--surface-white);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.qty-btn {
+  border: none;
+  background: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--secondary-color);
+  transition: var(--transition-fast);
+}
+
+.qty-btn:hover:not(:disabled) {
+  background: var(--bg-subtle);
+  color: var(--primary-color);
+}
+
+.qty-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qty-input {
+  width: 44px;
+  text-align: center;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  outline: none;
+  -moz-appearance: textfield;
+  padding: 0;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   11. Order Tracking Stepper (Desktop & Mobile Timeline)
+   -------------------------------------------------------------------------- */
+.tracking-stepper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 2.5rem 0;
+}
+
+.tracking-stepper::before {
+  content: '';
+  position: absolute;
+  top: 23px;
+  left: 45px;
+  right: 45px;
+  height: 4px;
+  background-color: var(--border-color);
+  z-index: 1;
+  border-radius: var(--radius-full);
+}
+
+.tracking-step {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.step-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--surface-white);
+  border: 3px solid var(--border-color);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem auto;
+  font-weight: 700;
+  font-size: 1.15rem;
+  transition: var(--transition-smooth);
+}
+
+.tracking-step.completed .step-circle {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px var(--success-light);
+}
+
+.tracking-step.active .step-circle {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 0 0 5px var(--primary-light);
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.tracking-step.completed .step-label,
+.tracking-step.active .step-label {
+  color: #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+   12. Quick Desk Calculator Gadget
+   -------------------------------------------------------------------------- */
+.calc-widget {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-lg);
+  padding: 1.35rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+}
+
+.calc-display {
+  background: #020617;
+  color: #38bdf8;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: clamp(1.3rem, 3vw, 1.55rem);
+  font-weight: 700;
+  text-align: right;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  letter-spacing: 1.5px;
+  min-height: 56px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 1px solid #1e293b;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.calc-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.calc-btn {
+  padding: 0.65rem 0.5rem;
+  min-height: 46px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-btn:hover {
+  background: #334155;
+  color: #38bdf8;
+  border-color: #475569;
+}
+
+.calc-btn:active {
+  transform: scale(0.95);
+  background: #0f172a;
+}
+
+.calc-btn.op-btn {
+  background: #334155;
+  color: #93c5fd;
+  border-color: #475569;
+}
+
+.calc-btn.op-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.calc-btn.equal-btn {
+  background: #0d6efd;
+  color: #ffffff;
+  border-color: #0d6efd;
+  grid-column: span 2;
+  font-weight: 700;
+}
+
+.calc-btn.equal-btn:hover {
+  background: #0b5ed7;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   13. Admin Dashboard Components
+   -------------------------------------------------------------------------- */
+.admin-stat-card {
+  background: var(--surface-white);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: clamp(0.95rem, 2vw, 1.35rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  height: 100%;
+  transition: var(--transition-fast);
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.admin-stat-number {
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.admin-stat-icon {
+  width: clamp(42px, 8vw, 52px);
+  height: clamp(42px, 8vw, 52px);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   14. Buttons, Badges & Interactive Controls
+   -------------------------------------------------------------------------- */
+.btn {
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* Surprise Me Button Styling */
+.btn-surprise {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #ffffff !important;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.btn-surprise:hover {
+  background: linear-gradient(135deg, #d97706, #dc2626);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.45);
+}
+
+/* Semantic Badges for Stock */
+.badge-in-stock {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.badge-low-stock {
+  background-color: #fff3cd;
+  color: #664d03;
+  border: 1px solid #ffecb5;
+}
+
+.badge-out-of-stock {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+/* Custom Toast Container */
+.toast-container-campus {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1090;
+}
+
+/* Modal Dialogs */
+.modal-content {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.15rem 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+}
+
+/* Product Detail Modal Image Gallery */
+.modal-product-img-main {
+  width: 100%;
+  height: clamp(190px, 30vw, 260px);
+  object-fit: contain;
+  background: var(--bg-light);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.modal-thumbnails {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modal-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--surface-white);
+  padding: 3px;
+  transition: var(--transition-fast);
+}
+
+.modal-thumb.active,
+.modal-thumb:hover {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   15. Footer Components
+   -------------------------------------------------------------------------- */
+.footer-campus {
+  background-color: #0f172a;
+  color: #94a3b8;
+  padding-top: 3.5rem;
+  border-top: 4px solid var(--primary-color);
+}
+
+.footer-campus h5 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+}
+
+.footer-campus ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer-campus ul li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-campus a {
+  color: #94a3b8;
+  display: inline-block;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.footer-campus a:hover {
+  color: #38bdf8;
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+.footer-bottom {
+  background-color: #020617;
+  padding: 1.25rem 0;
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  border-top: 1px solid #1e293b;
+}
+
+/* --------------------------------------------------------------------------
+   16. Responsive Layout Breakpoints & UI Repairs
+   -------------------------------------------------------------------------- */
+
+/* Large Tablets & Mobile (< 992px) */
+@media (max-width: 991.98px) {
+  /* Prevent sticky sidebar from blocking mobile scroll */
+  .sticky-top {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Navbar collapse menu polish */
+  .navbar-collapse {
+    background-color: var(--surface-white);
+    padding: 1rem 0.75rem;
+    border-radius: var(--radius-md);
+    margin-top: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+
+  .navbar-nav {
+    margin-bottom: 0.75rem;
+  }
+
+  /* Navbar actions wrap neatly */
+  .navbar-collapse .d-flex.align-items-center.gap-2 {
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+/* Tablets and Mobile Devices (< 768px) */
+@media (max-width: 767.98px) {
+  .hero-section {
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  .hero-img-wrapper {
+    margin-top: 1.5rem;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-section .d-flex.flex-wrap.gap-3 {
+    justify-content: center;
+  }
+
+  .featured-carousel .carousel-item {
+    min-height: 420px;
+    height: auto;
+  }
+
+  .carousel-slide-content {
+    min-height: 420px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .carousel-overlay {
+    margin: 0 auto;
+  }
+
+  .carousel-overlay .d-flex.align-items-center.gap-3 {
+    justify-content: center;
+  }
+
+  /* Transform Order Tracking Stepper into a clean Vertical Timeline */
+  .tracking-stepper {
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+    position: relative;
+    padding-left: 0.75rem;
+  }
+
+  .tracking-stepper::before {
+    display: block !important;
+    top: 20px !important;
+    bottom: 20px !important;
+    left: 33px !important;
+    width: 3px !important;
+    height: auto !important;
+    right: auto !important;
+  }
+
+  .tracking-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    width: 100%;
+  }
+
+  .step-circle {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .step-label {
+    margin-bottom: 0;
+  }
+}
+
+/* Small Mobile Phones (< 576px) */
+@media (max-width: 575.98px) {
+  .top-bar {
+    font-size: 0.75rem;
+    padding: 0.35rem 0;
+  }
+
+  .top-bar .container {
+    justify-content: center !important;
+    text-align: center;
+    gap: 0.35rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.15rem;
+  }
+
+  .brand-icon {
+    height: 32px;
+    max-width: 140px;
+  }
+
+  .calc-display {
+    font-size: 1.25rem;
+    padding: 0.65rem 0.85rem;
+    min-height: 48px;
+  }
+
+  .calc-btn {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  .toast-container-campus {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   17. Accessibility (Reduced Motion)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .pulse-indicator {
+    animation: none !important;
+  }
+
+  .product-card:hover,
+  .category-card:hover,
+  .benefit-card:hover,
+  .btn-surprise:hover {
+    transform: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. Print Styles for Receipts and Orders
+   -------------------------------------------------------------------------- */
+@media print {
+  .navbar-campus,
+  .top-bar,
+  .footer-campus,
+  .btn-no-print,
+  .calc-widget,
+  .toast-container-campus,
+  .carousel,
+  aside {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .receipt-card,
+  .card {
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #000000 !important;
+  }
+}
